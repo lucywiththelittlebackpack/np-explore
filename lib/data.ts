@@ -174,7 +174,7 @@ const parks: Park[] = [
         location: 'USA',
         coordinates: { lat: 44.42, lng: -110.58 },
         description: 'The first national park in the world, known for its wildlife and geothermal features.',
-        heroImage: 'https://plus.unsplash.com/premium_photo-1673264933061-f1ea43b13032',
+        heroImage: 'https://images.unsplash.com/photo-1573459807204-0357dbe972d3?auto=format&fit=crop&q=80&w=1600',
         gallery: [
             'https://images.unsplash.com/photo-1490260400179-d656f04de422?auto=format&fit=crop&q=80&w=800',
             'https://images.unsplash.com/photo-1518098268026-4e1877433665?auto=format&fit=crop&q=80&w=800'
