@@ -7,6 +7,7 @@ export interface Wildlife {
   description: string;
   image: string;
   bestTime: string; // e.g., "Early Morning", "Spring"
+  seenAt?: string[]; // Park IDs
 }
 
 export interface Accommodation {
@@ -18,6 +19,9 @@ export interface Accommodation {
   amenities: string[];
   image: string;
   bookingUrl?: string;
+  parkId?: string;
+  distance?: string;
+  rating?: number;
 }
 
 export interface Park {
@@ -33,6 +37,7 @@ export interface Park {
   accommodation: Accommodation[];
   highlights: string[];
   bestSeason: string;
+  activities?: string[]; // e.g., "Birding", "Hiking", "Photography"
 }
 
 export interface Collection {

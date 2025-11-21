@@ -1,10 +1,8 @@
-import { getWildlifeById, getAllWildlife, getAllParks } from '@/lib/data';
+import { getWildlifeById, getWildlife, getParks } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '@/styles/wildlife.module.css';
-import ParkCard from '@/components/ui/ParkCard';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import { ArrowLeft, MapPin, Info, Calendar } from 'lucide-react';
 
 interface PageProps {
     params: {
@@ -13,89 +11,84 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-    const wildlife = getAllWildlife();
-    return wildlife.map((w) => ({
-        id: w.id,
+    const wildlife = getWildlife();
+    return wildlife.map((animal) => ({
+        id: animal.id,
     }));
 }
 
 export default function WildlifePage({ params }: PageProps) {
     const animal = getWildlifeById(params.id);
+    const parks = getParks().filter(p => p.wildlife.some(w => w.id === params.id));
 
     if (!animal) {
         notFound();
     }
 
-    // Find parks where this animal is found
-    const parks = getAllParks().filter(park =>
-        park.wildlife.some(w => w.id === animal.id)
-    );
-
     return (
-        <main>
-            <div className={styles.hero}>
+        <main className="pb-24">
+            <div className="relative h-[50vh] w-full">
                 <Image
                     src={animal.image}
                     alt={animal.name}
                     fill
-                    className={styles.heroImage}
+                    className="object-cover"
                     priority
                 />
-                <div className={styles.overlay} />
-                <div className={`${styles.heroContent} container`}>
-                    <Link href="/wildlife" className="btn btn-secondary" style={{ marginBottom: '1rem', display: 'inline-flex' }}>
-                        <ArrowLeft size={16} /> Back to Index
-                    </Link>
-                    <h1 className={`${styles.title} text-gradient`}>{animal.name}</h1>
-                    <p className={styles.subtitle}>{animal.scientificName}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 w-full p-8 md:p-16">
+                    <div className="container mx-auto">
+                        <Link href="/wildlife" className="inline-flex items-center gap-2 text-slate-300 hover:text-white mb-6 transition-colors">
+                            <ArrowLeft size={20} /> Back to Index
+                        </Link>
+                        <div className="flex items-center gap-3 mb-2">
+                            <span className="bg-brand-green/20 text-brand-green px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider border border-brand-green/30">
+                                {animal.type}
+                            </span>
+                            <span className="bg-brand-gold/20 text-brand-gold px-3 py-1 rounded-full text-sm font-bold uppercase tracking-wider border border-brand-gold/30">
+                                {animal.rarity}
+                            </span>
+                        </div>
+                        <h1 className="text-5xl md:text-6xl font-display font-bold text-white drop-shadow-lg">{animal.name}</h1>
+                        <p className="text-xl text-slate-300 mt-4 italic">{animal.scientificName}</p>
+                    </div>
                 </div>
             </div>
 
-            <div className={`${styles.detailGrid} container`}>
-                <div>
-                    <section className={styles.infoBox}>
-                        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>About</h2>
-                        <p style={{ lineHeight: '1.8', color: '#cbd5e1' }}>{animal.description}</p>
+            <div className="container mx-auto px-4 mt-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div className="lg:col-span-2 space-y-8">
+                    <section className="bg-surface p-8 rounded-2xl border border-slate-800">
+                        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                            <Info className="text-brand-green" /> About
+                        </h2>
+                        <p className="text-slate-300 leading-relaxed text-lg">{animal.description}</p>
+
+                        <div className="mt-6 pt-6 border-t border-slate-700 flex items-center gap-3 text-slate-300">
+                            <Calendar className="text-brand-green" />
+                            <span className="font-medium">Best Time to Spot:</span>
+                            <span>{animal.bestTime}</span>
+                        </div>
                     </section>
 
-                    <section style={{ marginTop: '2rem' }}>
-                        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Where to Find Them</h2>
-                        {parks.length > 0 ? (
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem' }}>
-                                {parks.map(park => (
-                                    <ParkCard key={park.id} park={park} />
-                                ))}
-                            </div>
-                        ) : (
-                            <p style={{ color: '#94a3b8' }}>No parks listed for this species yet.</p>
-                        )}
+                    <section>
+                        <h2 className="text-2xl font-bold mb-6">Where to Find Them</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {parks.map(park => (
+                                <Link key={park.id} href={`/parks/${park.slug}`} className="group flex items-center gap-4 bg-surface p-4 rounded-xl border border-slate-800 hover:border-brand-green transition-colors">
+                                    <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
+                                        <Image src={park.heroImage} alt={park.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                    </div>
+                                    <div>
+                                        <h3 className="font-bold text-foreground group-hover:text-brand-green transition-colors">{park.name}</h3>
+                                        <div className="flex items-center gap-1 text-xs text-slate-400 mt-1">
+                                            <MapPin size={12} /> {park.location}
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </section>
                 </div>
-
-                <aside>
-                    <div className={styles.infoBox}>
-                        <div style={{ marginBottom: '1rem' }}>
-                            <div className={styles.label}>Type</div>
-                            <div className={styles.value}>{animal.type}</div>
-                        </div>
-                        <div style={{ marginBottom: '1rem' }}>
-                            <div className={styles.label}>Rarity</div>
-                            <div className={styles.value} style={{
-                                color: animal.rarity === 'Endangered' ? '#ef4444' :
-                                    animal.rarity === 'Rare' ? '#f59e0b' : 'inherit'
-                            }}>
-                                {animal.rarity}
-                            </div>
-                        </div>
-                        <div>
-                            <div className={styles.label}>Best Time to See</div>
-                            <div className={styles.value} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Calendar size={16} />
-                                {animal.bestTime}
-                            </div>
-                        </div>
-                    </div>
-                </aside>
             </div>
         </main>
     );
