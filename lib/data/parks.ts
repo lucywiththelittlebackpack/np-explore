@@ -125,7 +125,7 @@ export const parks: Park[] = [
         location: 'Chile',
         coordinates: { lat: -50.9423, lng: -73.4068 },
         description: 'Known for its soaring mountains, bright blue icebergs that cleave from glaciers and golden pampas (grasslands).',
-        heroImage: 'https://images.unsplash.com/photo-1519112232436-9923c63b93db?auto=format&fit=crop&q=80&w=1600',
+        heroImage: 'https://images.unsplash.com/photo-1558517286-6b7b81953cb5?auto=format&fit=crop&q=80&w=1600',
         gallery: [
             'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=800',
             'https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&q=80&w=800'
@@ -201,7 +201,7 @@ export const parks: Park[] = [
         location: 'China',
         coordinates: { lat: 29.3151, lng: 110.4340 },
         description: 'Famous for its pillar-like formations that inspired the floating mountains in Avatar.',
-        heroImage: 'https://images.unsplash.com/photo-1627487962738-10e8c5327d8e?auto=format&fit=crop&q=80&w=1600',
+        heroImage: 'https://images.unsplash.com/photo-1514920735211-8c697444a248??auto=format&fit=crop&q=80&w=1600',
         gallery: [
             'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&q=80&w=800',
             'https://images.unsplash.com/photo-1474401915596-2c5788dfc97c?auto=format&fit=crop&q=80&w=800'

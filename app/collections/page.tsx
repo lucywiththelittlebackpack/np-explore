@@ -21,7 +21,7 @@ export default function CollectionsIndex() {
                 size="default"
             />
 
-            <div className="container mx-auto px-4 py-16 -mt-20 relative z-20">
+            <div className="container mx-auto px-4 py-16 -mt-10 relative z-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <div className="md:col-span-2 lg:col-span-2 row-span-2">
                         <CollectionCard collection={featuredCollection} featured />
