@@ -25,6 +25,7 @@ export default async function ParkPage({ params }: PageProps) {
                     src={park.heroImage}
                     alt={park.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                     priority
                 />
@@ -92,7 +93,7 @@ export default async function ParkPage({ params }: PageProps) {
                                 {park.wildlife.map((animal) => (
                                     <Link key={animal.id} href={`/wildlife/${animal.id}`} className="flex items-center gap-5 bg-white p-4 rounded-2xl hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-brand-primary/30 group">
                                         <div className="relative w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
-                                            <Image src={animal.image} alt={animal.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                            <Image src={animal.image} alt={animal.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                         </div>
                                         <div className="flex-grow">
                                             <h3 className="font-bold text-lg text-brand-dark group-hover:text-brand-primary transition-colors">{animal.name}</h3>
@@ -119,7 +120,7 @@ export default async function ParkPage({ params }: PageProps) {
                                 {park.accommodation.map((stay) => (
                                     <div key={stay.id} className="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 hover:shadow-2xl transition-all duration-300 group flex flex-col md:flex-row">
                                         <div className="relative h-64 md:h-auto md:w-2/5">
-                                            <Image src={stay.image} alt={stay.name} fill className="object-cover" />
+                                            <Image src={stay.image} alt={stay.name} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" fill className="object-cover" />
                                             <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg text-xs font-bold text-brand-dark shadow-sm">
                                                 {stay.type}
                                             </div>
@@ -170,9 +171,20 @@ export default async function ParkPage({ params }: PageProps) {
                             <div className="h-64 rounded-2xl overflow-hidden mb-6 relative z-0 shadow-inner">
                                 <ParkMapWrapper park={park} />
                             </div>
-                            <button className="w-full bg-brand-primary text-white font-bold py-4 rounded-xl hover:bg-brand-secondary transition-colors flex items-center justify-center gap-2 shadow-lg shadow-brand-primary/20">
-                                Get Directions <ArrowRight size={18} />
-                            </button>
+                            <div className="space-y-3">
+                                <div className="flex justify-between items-center px-1">
+                                    <span className="text-sm font-bold text-slate-500">Est. Return Flight</span>
+                                    <span className="text-lg font-bold text-brand-dark">$300 - $500</span>
+                                </div>
+                                <a
+                                    href={`https://www.google.com/travel/flights?q=Flights+to+${park.name}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full bg-brand-primary text-white font-bold py-4 rounded-xl hover:bg-brand-secondary transition-colors flex items-center justify-center gap-2 shadow-lg shadow-brand-primary/20"
+                                >
+                                    Book Flights <ArrowRight size={18} />
+                                </a>
+                            </div>
                         </div>
 
                         {/* Highlights */}

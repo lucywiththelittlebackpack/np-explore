@@ -40,11 +40,23 @@ export interface Park {
   activities?: string[]; // e.g., "Birding", "Hiking", "Photography"
 }
 
+export interface ItineraryItem {
+  day: string;
+  title: string;
+  description: string;
+  parkId?: string;
+  activity?: string;
+}
+
 export interface Collection {
   id: string;
   slug: string;
   title: string;
+  subTitle: string;
   description: string;
   coverImage: string;
   parks: Park[];
+  duration: string;
+  vibe: 'Adventure' | 'Relaxed' | 'Family' | 'Wildlife' | 'Photography';
+  itinerary: ItineraryItem[];
 }

@@ -48,7 +48,7 @@ export default function Footer() {
                 </div>
 
                 <div className="text-center pt-8 border-t border-slate-800 text-slate-500 text-sm">
-                    © {new Date().getFullYear()} WildLens. All rights reserved.
+                    © 2005-{new Date().getFullYear()} WildLens. All rights reserved.
                 </div>
             </div>
         </footer>

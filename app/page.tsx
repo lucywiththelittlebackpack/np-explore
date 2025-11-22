@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { getParks, getCollections } from '@/lib/data';
+import { getParks, getCollections, getAccommodations } from '@/lib/data';
 import ParkCard from '@/components/ui/ParkCard';
 import { Search, Map, ArrowRight, Bird, Camera, Binoculars, Tent, Globe } from 'lucide-react';
+import AccommodationCard from '@/components/accommodation/AccommodationCard';
 
 export default function Home() {
   const featuredParks = getParks().slice(0, 3);
+  const featuredAccomodation = getAccommodations().slice(0, 3);
   const collections = getCollections();
 
   const categories = [
@@ -24,6 +26,7 @@ export default function Home() {
             src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=2000"
             alt="Hero Background"
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover brightness-[0.65] scale-105 animate-ken-burns"
             priority
           />
@@ -69,7 +72,7 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="container mx-auto px-4 -mt-20 relative z-20 mb-24">
+      <section className="container mx-auto px-4 -mt-20 relative z-20 mb-24 mt-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {categories.map((cat, idx) => (
             <Link
@@ -127,6 +130,7 @@ export default function Home() {
                 <Image
                   src={collection.coverImage}
                   alt={collection.title}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   fill
                   className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
@@ -144,6 +148,25 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Featured Accomodation */}
+      <section className="container mx-auto px-4 py-12 mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-brand-dark mb-3">Trending Now</h2>
+            <p className="text-slate-500 text-lg">Most popular accomodation this season</p>
+          </div>
+          <Link href="/accomodation" className="group flex items-center gap-2 text-brand-primary font-bold hover:text-brand-secondary transition-colors px-6 py-3 bg-brand-primary/5 rounded-full hover:bg-brand-primary/10">
+            View all accomodation <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {featuredAccomodation.map((accomodation) => (
+            <AccommodationCard key={accomodation.id} accommodation={accomodation} />
+          ))}
         </div>
       </section>
 

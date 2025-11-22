@@ -32,6 +32,7 @@ export default function WildlifePage({ params }: PageProps) {
                     src={animal.image}
                     alt={animal.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                     priority
                 />
@@ -76,7 +77,7 @@ export default function WildlifePage({ params }: PageProps) {
                             {parks.map(park => (
                                 <Link key={park.id} href={`/parks/${park.slug}`} className="group flex items-center gap-4 bg-surface p-4 rounded-xl border border-slate-800 hover:border-brand-green transition-colors">
                                     <div className="relative w-24 h-24 rounded-lg overflow-hidden flex-shrink-0">
-                                        <Image src={park.heroImage} alt={park.name} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                                        <Image src={park.heroImage} alt={park.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-foreground group-hover:text-brand-green transition-colors">{park.name}</h3>

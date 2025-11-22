@@ -3,44 +3,42 @@
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { useState } from 'react';
 
-interface FilterBarProps {
+interface AccommodationFilterProps {
     query: string;
-    activity: string;
-    season: string;
+    type: string;
+    priceRange: string;
     onSearch: (query: string) => void;
-    onFilterChange: (filters: { activity: string; season: string }) => void;
+    onFilterChange: (filters: { type: string; priceRange: string }) => void;
 }
 
-export default function FilterBar({ query, activity, season, onSearch, onFilterChange }: FilterBarProps) {
+export default function AccommodationFilter({ query, type, priceRange, onSearch, onFilterChange }: AccommodationFilterProps) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         onSearch(e.target.value);
     };
 
-    const handleFilter = (type: 'activity' | 'season', val: string) => {
-        const newActivity = type === 'activity' ? val : activity;
-        const newSeason = type === 'season' ? val : season;
-
-        onFilterChange({ activity: newActivity, season: newSeason });
+    const handleFilter = (filterType: 'type' | 'priceRange', val: string) => {
+        const newType = filterType === 'type' ? val : type;
+        const newPrice = filterType === 'priceRange' ? val : priceRange;
+        onFilterChange({ type: newType, priceRange: newPrice });
     };
 
     const clearFilters = () => {
-        onFilterChange({ activity: '', season: '' });
+        onFilterChange({ type: '', priceRange: '' });
     };
 
-    const activities = ['Birding', 'Hiking', 'Photography', 'Safari', 'Snorkeling'];
-    const seasons = ['Dry Season', 'Summer', 'Winter', 'Spring'];
+    const types = ['Lodge', 'Hotel', 'Campsite', 'Cabin', 'Resort'];
+    const prices = ['Low', 'Medium', 'High', 'Luxury'];
 
     return (
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 mb-8 overflow-hidden">
-            {/* Search Input Area */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 mb-12 overflow-hidden">
             <div className="p-2 flex items-center gap-2">
                 <div className="relative flex-grow">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                     <input
                         type="text"
-                        placeholder="Search destinations..."
+                        placeholder="Search by name, location, or amenity..."
                         value={query}
                         onChange={handleSearch}
                         className="w-full pl-12 pr-4 py-3 bg-slate-50 rounded-xl text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-brand-primary/20 transition-all"
@@ -48,7 +46,7 @@ export default function FilterBar({ query, activity, season, onSearch, onFilterC
                 </div>
                 <button
                     onClick={() => setIsExpanded(!isExpanded)}
-                    className={`p-3 rounded-xl transition-colors ${isExpanded || activity || season
+                    className={`p-3 rounded-xl transition-colors ${isExpanded || type || priceRange
                         ? 'bg-brand-primary text-white'
                         : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
                         }`}
@@ -57,19 +55,16 @@ export default function FilterBar({ query, activity, season, onSearch, onFilterC
                 </button>
             </div>
 
-            {/* Expandable Filters */}
             <div className={`transition-all duration-300 ease-in-out overflow-hidden ${isExpanded ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'}`}>
                 <div className="p-4 border-t border-slate-100 space-y-6">
-
-                    {/* Activities - Horizontal Scroll on Mobile */}
                     <div>
-                        <label className="block text-xs font-bold text-slate-400 uppercase mb-3">Activity</label>
+                        <label className="block text-xs font-bold text-slate-400 uppercase mb-3">Accommodation Type</label>
                         <div className="flex flex-wrap gap-2">
-                            {activities.map((opt) => (
+                            {types.map((opt) => (
                                 <button
                                     key={opt}
-                                    onClick={() => handleFilter('activity', activity === opt ? '' : opt)}
-                                    className={`text-sm px-4 py-2 rounded-full border transition-all ${activity === opt
+                                    onClick={() => handleFilter('type', type === opt ? '' : opt)}
+                                    className={`text-sm px-4 py-2 rounded-full border transition-all ${type === opt
                                         ? 'bg-brand-primary text-white border-brand-primary shadow-md shadow-brand-primary/20'
                                         : 'bg-white text-slate-600 border-slate-200 hover:border-brand-primary hover:text-brand-primary'
                                         }`}
@@ -80,15 +75,14 @@ export default function FilterBar({ query, activity, season, onSearch, onFilterC
                         </div>
                     </div>
 
-                    {/* Seasons */}
                     <div>
-                        <label className="block text-xs font-bold text-slate-400 uppercase mb-3">Best Season</label>
+                        <label className="block text-xs font-bold text-slate-400 uppercase mb-3">Price Range</label>
                         <div className="flex flex-wrap gap-2">
-                            {seasons.map((opt) => (
+                            {prices.map((opt) => (
                                 <button
                                     key={opt}
-                                    onClick={() => handleFilter('season', season === opt ? '' : opt)}
-                                    className={`text-sm px-4 py-2 rounded-full border transition-all ${season === opt
+                                    onClick={() => handleFilter('priceRange', priceRange === opt ? '' : opt)}
+                                    className={`text-sm px-4 py-2 rounded-full border transition-all ${priceRange === opt
                                         ? 'bg-brand-primary text-white border-brand-primary shadow-md shadow-brand-primary/20'
                                         : 'bg-white text-slate-600 border-slate-200 hover:border-brand-primary hover:text-brand-primary'
                                         }`}
@@ -99,8 +93,7 @@ export default function FilterBar({ query, activity, season, onSearch, onFilterC
                         </div>
                     </div>
 
-                    {/* Clear Button */}
-                    {(activity || season) && (
+                    {(type || priceRange) && (
                         <div className="flex justify-end pt-2">
                             <button
                                 onClick={clearFilters}

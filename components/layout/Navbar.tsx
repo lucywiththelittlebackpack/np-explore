@@ -30,6 +30,7 @@ export default function Navbar() {
         { path: '/', label: 'Home' },
         { path: '/explore', label: 'Explore' },
         { path: '/collections', label: 'Collections' },
+        { path: '/accommodation', label: 'Stays' },
         { path: '/about', label: 'About' },
     ];
 
@@ -51,8 +52,8 @@ export default function Navbar() {
                             key={link.path}
                             href={link.path}
                             className={`text-sm font-bold transition-colors duration-200 ${isActive(link.path)
-                                    ? 'text-brand-primary'
-                                    : scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'
+                                ? 'text-brand-primary'
+                                : scrolled ? 'text-slate-600 hover:text-brand-primary' : 'text-white/90 hover:text-white'
                                 }`}
                         >
                             {link.label}
@@ -61,8 +62,8 @@ export default function Navbar() {
                     <Link
                         href="/explore"
                         className={`px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg ${scrolled
-                                ? 'bg-brand-primary text-white hover:bg-brand-secondary shadow-brand-primary/20'
-                                : 'bg-white text-brand-primary hover:bg-slate-100'
+                            ? 'bg-brand-primary text-white hover:bg-brand-secondary shadow-brand-primary/20'
+                            : 'bg-white text-brand-primary hover:bg-slate-100'
                             }`}
                     >
                         Plan Trip
