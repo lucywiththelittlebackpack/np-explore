@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getParks, getCollections, getAccommodations } from '@/lib/data';
 import ParkCard from '@/components/ui/ParkCard';
+import SectionFeature from '@/components/ui/SectionFeature';
 import { Map, ArrowRight, Bird, Camera, Binoculars, Tent, Globe } from 'lucide-react';
 import AccommodationCard from '@/components/accommodation/AccommodationCard';
 import SearchBox from '@/components/ui/SearchBox';
@@ -73,15 +74,7 @@ export default function Home() {
 
       {/* Featured Parks */}
       <section className="container mx-auto px-4 py-12 mb-12">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-brand-dark mb-3">Trending Now</h2>
-            <p className="text-slate-500 text-lg">Most visited destinations this season</p>
-          </div>
-          <Link href="/explore" className="group flex items-center gap-2 text-brand-primary font-bold hover:text-brand-secondary transition-colors px-6 py-3 bg-brand-primary/5 rounded-full hover:bg-brand-primary/10">
-            View all destinations <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+        <SectionFeature title="Trending Now" subtitle="Most visited destinations this season" action="View all destinations" link="/explore" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {featuredParks.map((park) => (
@@ -135,15 +128,7 @@ export default function Home() {
 
       {/* Featured Accomodation */}
       <section className="container mx-auto px-4 py-12 mb-12">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-          <div>
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-brand-dark mb-3">Trending Now</h2>
-            <p className="text-slate-500 text-lg">Most popular accomodation this season</p>
-          </div>
-          <Link href="/accomodation" className="group flex items-center gap-2 text-brand-primary font-bold hover:text-brand-secondary transition-colors px-6 py-3 bg-brand-primary/5 rounded-full hover:bg-brand-primary/10">
-            View all accomodation <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+        <SectionFeature title="Trending Now" subtitle="Most popular accomodation this season" action="View all accomodation" link="/accomodation" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {featuredAccomodation.map((accomodation) => (

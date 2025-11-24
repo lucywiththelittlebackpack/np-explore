@@ -37,7 +37,7 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/90 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-5'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen ? 'bg-white/90 shadow-sm py-3' : 'bg-transparent py-5'
                 }`}
         >
             <div className="container mx-auto px-4 flex justify-between items-center">
@@ -85,19 +85,19 @@ export default function Navbar() {
             {/* Mobile Nav Overlay & Drawer */}
             {/* Mobile Nav Overlay & Drawer */}
             <div
-                className={`fixed inset-0 z-[60] md:hidden transition-all duration-300 ${isOpen ? 'visible' : 'invisible pointer-events-none'}`}
+                className={`fixed inset-0 z-[60] md:hidden transition-all ${isOpen ? 'visible' : 'invisible pointer-events-none'}`}
             >
                 {/* Backdrop */}
                 <div
-                    className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+                    className={`absolute inset-0 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
                     onClick={() => setIsOpen(false)}
                 />
 
                 {/* Drawer */}
                 <div
-                    className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white shadow-2xl flex flex-col p-6 transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                    className={`absolute right-0 top-0 bottom-0 w-full shadow-2xl flex flex-col p-6 transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0 bg-white' : 'translate-x-full'}`}
                 >
-                    <div className="flex justify-between items-center mb-8">
+                    <div className="flex bg-white justify-between items-center mb-8">
                         <Link href="/" className="font-display text-2xl font-bold text-brand-dark flex items-center gap-2" onClick={() => setIsOpen(false)}>
                             <Globe size={32} className="text-brand-primary" />
                             <span className="text-brand-dark">GreenPlanet</span>
