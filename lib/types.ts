@@ -48,7 +48,7 @@ export interface ItineraryItem {
   activity?: string;
 }
 
-export interface Collection {
+export interface Trip {
   id: string;
   slug: string;
   title: string;
@@ -59,4 +59,15 @@ export interface Collection {
   duration: string;
   vibe: 'Adventure' | 'Relaxed' | 'Family' | 'Wildlife' | 'Photography';
   itinerary: ItineraryItem[];
+}
+
+export interface Collection {
+  id: string;
+  slug: string;
+  title: string;
+  subTitle: string;
+  description: string;
+  coverImage: string;
+  parks: Park[];
+  vibe: string;
 }

@@ -1,8 +1,9 @@
-import { Park, Wildlife, Accommodation, Collection } from './types';
+import { Park, Wildlife, Accommodation, Collection, Trip } from './types';
 import { parks } from './data/parks';
 import { wildlifeData } from './data/wildlife';
 import { accommodationData } from './data/accommodations';
 import { collections } from './data/collections';
+import { trips } from './data/trips';
 
 // --- Helper Functions ---
 export function getParks(): Park[] {
@@ -27,6 +28,14 @@ export function getCollections(): Collection[] {
 
 export function getCollectionBySlug(slug: string): Collection | undefined {
     return collections.find((c) => c.slug === slug);
+}
+
+export function getTrips(): Trip[] {
+    return trips;
+}
+
+export function getTripBySlug(slug: string): Trip | undefined {
+    return trips.find((t) => t.slug === slug);
 }
 
 export function getAccommodations(): Accommodation[] {

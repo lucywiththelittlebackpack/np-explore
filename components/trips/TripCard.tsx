@@ -1,23 +1,23 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Collection } from '@/lib/types';
+import { Trip } from '@/lib/types';
 import SaveButton from '@/components/ui/SaveButton';
-import { MapPin } from 'lucide-react';
+import { Calendar, MapPin } from 'lucide-react';
 
-interface CollectionCardProps {
-    collection: Collection;
+interface TripCardProps {
+    trip: Trip;
     featured?: boolean;
 }
 
-export default function CollectionCard({ collection, featured = false }: CollectionCardProps) {
+export default function TripCard({ trip, featured = false }: TripCardProps) {
     return (
         <Link
-            href={`/collections/${collection.slug}`}
+            href={`/trips/${trip.slug}`}
             className={`group relative block overflow-hidden rounded-3xl ${featured ? 'md:col-span-2 md:row-span-2 h-[500px]' : 'h-[400px]'}`}
         >
             <Image
-                src={collection.coverImage}
-                alt={collection.title}
+                src={trip.coverImage}
+                alt={trip.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -29,8 +29,11 @@ export default function CollectionCard({ collection, featured = false }: Collect
             </div>
 
             <div className="absolute top-4 left-4 z-20 flex gap-2">
+                <span className="bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10 flex items-center gap-1">
+                    <Calendar size={12} /> {trip.duration}
+                </span>
                 <span className="bg-brand-green/80 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-white border border-white/10 uppercase tracking-wider">
-                    {collection.vibe}
+                    {trip.vibe}
                 </span>
             </div>
 
@@ -38,13 +41,13 @@ export default function CollectionCard({ collection, featured = false }: Collect
                 <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
                     <div className="flex items-center gap-2 mb-2 text-slate-300 text-xs font-bold uppercase tracking-widest">
                         <MapPin size={12} />
-                        {collection.parks.length} Parks
+                        {trip.parks.length} Destinations
                     </div>
                     <h3 className={`${featured ? 'text-3xl md:text-5xl' : 'text-2xl'} font-display font-bold text-white mb-2 leading-tight`}>
-                        {collection.title}
+                        {trip.title}
                     </h3>
                     <p className="text-slate-200 text-sm md:text-base line-clamp-2 opacity-90 font-light">
-                        {collection.subTitle}
+                        {trip.subTitle}
                     </p>
                 </div>
             </div>

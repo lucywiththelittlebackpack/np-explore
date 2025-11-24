@@ -20,9 +20,10 @@ export default function Footer() {
                     <div>
                         <h4 className="text-base font-semibold mb-6 text-foreground">Explore</h4>
                         <div className="flex flex-col gap-3">
-                            <Link href="/search" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Find Parks</Link>
+                            <Link href="/explore" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Find Parks</Link>
                             <Link href="/wildlife" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Wildlife Index</Link>
-                            <Link href="/collections" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Trip Collections</Link>
+                            <Link href="/trips" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Trips</Link>
+                            <Link href="/collections" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Collections</Link>
                             <Link href="/accommodation" className="text-slate-400 text-sm hover:text-brand-green transition-colors">Accommodation</Link>
                         </div>
                     </div>

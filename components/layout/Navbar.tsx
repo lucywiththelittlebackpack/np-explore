@@ -29,6 +29,7 @@ export default function Navbar() {
     const navLinks = [
         { path: '/', label: 'Home' },
         { path: '/explore', label: 'Explore' },
+        { path: '/trips', label: 'Trips' },
         { path: '/collections', label: 'Collections' },
         { path: '/accommodation', label: 'Stays' },
         { path: '/about', label: 'About' },
@@ -81,26 +82,56 @@ export default function Navbar() {
             </div>
 
             {/* Mobile Nav Overlay */}
+            {/* Mobile Nav Overlay & Drawer */}
+            {/* Mobile Nav Overlay & Drawer */}
             <div
-                className={`fixed inset-0 bg-white z-40 flex flex-col justify-center items-center gap-8 transition-all duration-300 md:hidden ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-                    }`}
+                className={`fixed inset-0 z-[60] md:hidden transition-all duration-300 ${isOpen ? 'visible' : 'invisible pointer-events-none'}`}
             >
-                {navLinks.map((link) => (
-                    <Link
-                        key={link.path}
-                        href={link.path}
-                        className={`text-3xl font-display font-bold ${isActive(link.path) ? 'text-brand-primary' : 'text-slate-800'
-                            }`}
-                    >
-                        {link.label}
-                    </Link>
-                ))}
-                <Link
-                    href="/explore"
-                    className="mt-4 bg-brand-primary text-white px-8 py-4 rounded-full text-xl font-bold shadow-xl shadow-brand-primary/20"
+                {/* Backdrop */}
+                <div
+                    className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+                    onClick={() => setIsOpen(false)}
+                />
+
+                {/* Drawer */}
+                <div
+                    className={`absolute right-0 top-0 bottom-0 w-full max-w-sm bg-white shadow-2xl flex flex-col p-6 transition-transform duration-300 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
                 >
-                    Plan Your Trip
-                </Link>
+                    <div className="flex justify-between items-center mb-8">
+                        <Link href="/" className="font-display text-2xl font-bold text-brand-dark flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                            <Globe size={32} className="text-brand-primary" />
+                            <span className="text-brand-dark">GreenPlanet</span>
+                        </Link>
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="p-2 text-slate-500 hover:text-slate-800 transition-colors"
+                            aria-label="Close menu"
+                        >
+                            <X size={28} />
+                        </button>
+                    </div>
+
+                    <div className="flex flex-col gap-6">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                href={link.path}
+                                className={`text-xl font-bold transition-colors ${isActive(link.path) ? 'text-brand-primary' : 'text-slate-800 hover:text-brand-primary'
+                                    }`}
+                                onClick={() => setIsOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+                        <Link
+                            href="/explore"
+                            className="mt-4 bg-brand-primary text-white px-6 py-4 rounded-full text-center text-lg font-bold shadow-lg shadow-brand-primary/20 hover:bg-brand-secondary transition-colors"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Plan Your Trip
+                        </Link>
+                    </div>
+                </div>
             </div>
         </nav>
     );
